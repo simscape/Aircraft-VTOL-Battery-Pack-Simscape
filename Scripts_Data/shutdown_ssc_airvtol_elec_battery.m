@@ -1,0 +1,2 @@
+curr_proj = simulinkproject;
+
