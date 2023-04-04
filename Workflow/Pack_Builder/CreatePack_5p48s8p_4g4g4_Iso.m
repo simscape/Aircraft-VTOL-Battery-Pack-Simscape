@@ -8,7 +8,7 @@
 % * Fidelity: Grouped, 4-4-4
 % * Thermal: No thermal connections
 %
-% Copyright 2022 The MathWorks, Inc.
+% Copyright 2022-2023 The MathWorks, Inc.
 
 %% Import Simscape Battery Package
 
@@ -76,7 +76,6 @@ title('Battery Cells, 5 Parallel, 12 Series');
 % Connect 4 modules in series
 batt_5p48s_4g4g4 = ModuleAssembly(...
     Module = repmat(batt_5p12s_4g4g4,1,4),...
-    CircuitConnection = "Series",...
     StackingAxis="X");
 
 

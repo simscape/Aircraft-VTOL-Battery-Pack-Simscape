@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Create Battery Pack 5p48s8p: 8 Subpacks with 5 Parallel Strings of 48 Cells</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-11-15"><meta name="DC.source" content="CreatePack_5p48s8p_1g10g1_5g1g5_Thr.m"><style type="text/css">
+      --><title>Create Battery Pack 5p48s8p: 8 Subpacks with 5 Parallel Strings of 48 Cells</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-03-15"><meta name="DC.source" content="CreatePack_5p48s8p_1g10g1_5g1g5_Thr.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -144,6 +144,8 @@ batt_5p48s8p_1g10g1_5g1g5_thr = Pack(<span class="keyword">...</span>
     CircuitConnection=<span class="string">"Parallel"</span>,<span class="keyword">...</span>
     AmbientThermalPath = <span class="string">"CellBasedThermalResistance"</span>,<span class="keyword">...</span>
     CoolantThermalPath = <span class="string">"CellBasedThermalResistance"</span>,<span class="keyword">...</span>
+    CoolingPlate = <span class="string">"Bottom"</span>,<span class="keyword">...</span>
+    CoolingPlateBlockPath = <span class="string">"batt_lib/Thermal/Parallel Channels"</span>,<span class="keyword">...</span>
     StackingAxis=<span class="string">"Y"</span>);
 
 <span class="comment">% Reuse figure if it exists for battery chart</span>
@@ -173,7 +175,7 @@ open_system(<span class="string">'pack_5p48s8p_1g10g1_5g1g5_Thr/Pack1'</span>,<s
 open_system(<span class="string">'pack_5p48s8p_1g10g1_5g1g5_Thr/Pack1/ModuleAssembly1'</span>,<span class="string">'force'</span>)
 </pre><img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_07.png" alt=""> <pre class="codeinput">close <span class="string">all</span>
 bdclose <span class="string">all</span>
-</pre><p class="footer">Copyright 2022 The MathWorks, Inc.<br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022b</a><br></p></div><!--
+</pre><p class="footer">Copyright 2022-2023 The MathWorks, Inc.<br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Create Battery Pack 5p48s8p: 8 Subpacks with 5 Parallel Strings of 48 Cells
 %
@@ -185,7 +187,7 @@ bdclose <span class="string">all</span>
 % * Fidelity: Grouped, 1-10-1 series, 5-1-5 parallel sets
 % * Thermal: Ambient and Cooling Plate
 %
-% Copyright 2022 The MathWorks, Inc.
+% Copyright 2022-2023 The MathWorks, Inc.
 
 %% Import Simscape Battery Package
 
@@ -281,6 +283,8 @@ batt_5p48s8p_1g10g1_5g1g5_thr = Pack(...
     CircuitConnection="Parallel",...
     AmbientThermalPath = "CellBasedThermalResistance",...
     CoolantThermalPath = "CellBasedThermalResistance",...    
+    CoolingPlate = "Bottom",...
+    CoolingPlateBlockPath = "batt_lib/Thermal/Parallel Channels",...
     StackingAxis="Y");
 
 % Reuse figure if it exists for battery chart

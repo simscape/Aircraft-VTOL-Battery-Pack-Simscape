@@ -2,7 +2,7 @@
 %% Plot Description:
 %
 
-% Copyright 2022 The MathWorks, Inc.
+% Copyright 2022-2023 The MathWorks, Inc.
 
 %% Check for thermal model
 
@@ -50,7 +50,7 @@ for sp_i = 1:length(subPkNms)
     modNms = sort(fnms(indModules));
     subT = [];
     for mo_i = 1:length(modNms)
-        subT = [subT simlog_ssc_airvtol_elec.Battery.(variantName).Pack.(subPkNms{sp_i}).(modNms{mo_i}).temperatureCellModel.series.values('degC')];
+        subT = [subT simlog_ssc_airvtol_elec.Battery.(variantName).Pack.(subPkNms{sp_i}).(modNms{mo_i}).temperatureCell.series.values('degC')];
     end
     ah(sp_i) = subplot(4,2,subplot_seq(sp_i));
     plot(simlog_t,subT)

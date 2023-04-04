@@ -1,7 +1,7 @@
 # **Electric Aircraft (VTOL) Battery Pack Model with Simscape&trade;**
 Copyright 2022 The MathWorks, Inc.
 
-This example models a vertical takeoff and landing (VTOL) aircraft and
+This example models an vertical takeoff and landing (VTOL) aircraft and
 explores the workflow of designing the battery pack.
 
 * **Batteries, motors, and propellers** are integrated to model the aircraft

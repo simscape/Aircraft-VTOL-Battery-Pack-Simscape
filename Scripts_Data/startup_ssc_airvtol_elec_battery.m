@@ -2,12 +2,6 @@ curr_proj = simulinkproject;
 
 ssc_airvtol_elec_default_params
 
-%% Create Array of Nodes Connector
-h = dir('**/*arrayOfThermalNodesConnector.sscp');
-cd(h(1).folder)
-ssc_build
-cd(curr_proj.RootFolder)
-
 %% Create Battery Objects
 CreatePack_5p48s8p_4g4g4_Iso
 CreatePack_5p48s8p_1g10g1_Iso

@@ -16,7 +16,7 @@
 % amount of detail for the engineering task.  Test harness models are used
 % to explore designs for the battery sub packs and the cooling system.
 %
-% Copyright 2022 The MathWorks, Inc.
+% Copyright 2022-2023 The MathWorks, Inc.
 
 %% Model
 %

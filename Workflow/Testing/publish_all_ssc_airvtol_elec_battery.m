@@ -16,3 +16,6 @@ save_figures_packHarness
 cd(curr_proj.RootFolder)
 cd('Overview')
 publish('ssc_airvtol_elec_battery.m','showCode',false)
+
+cd(fileparts(which('CreatePack_5p48s8p_1g10g1_5g1g5_Thr.m')));
+publish('CreatePack_5p48s8p_1g10g1_5g1g5_Thr.m','showCode',true)
