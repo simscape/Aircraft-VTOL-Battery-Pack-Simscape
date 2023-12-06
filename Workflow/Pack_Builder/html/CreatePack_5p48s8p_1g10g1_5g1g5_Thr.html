@@ -1,12 +1,17 @@
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Create Battery Pack 5p48s8p: 8 Subpacks with 5 Parallel Strings of 48 Cells</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-03-15"><meta name="DC.source" content="CreatePack_5p48s8p_1g10g1_5g1g5_Thr.m"><style type="text/css">
+      -->
+<title>Create Battery Pack 5p48s8p: 8 Subpacks with 5 Parallel Strings of 48 Cells</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2023-12-04">
+<meta name="DC.source" content="CreatePack_5p48s8p_1g10g1_5g1g5_Thr.m">
+<style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,10 +72,61 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Create Battery Pack 5p48s8p: 8 Subpacks with 5 Parallel Strings of 48 Cells</h1><!--introduction--><p>The code below automates the creation of a battery pack with electrical and thermal connections.  It uses MATLAB commands from the Battery Pack Builder to define the pack architecture and create the Simscape blocks for use in simulation.</p><div><ul><li>Fidelity: Grouped, 1-10-1 series, 5-1-5 parallel sets</li><li>Thermal: Ambient and Cooling Plate</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Import Simscape Battery Package</a></li><li><a href="#2">Define Cell</a></li><li><a href="#3">Define Parallel Assembly</a></li><li><a href="#4">Define Module</a></li><li><a href="#5">Define Module Assembly</a></li><li><a href="#6">Define Pack</a></li><li><a href="#7">Generate Simscape model for use in Simulink</a></li><li><a href="#8">Pack Model</a></li><li><a href="#10">Module Assembly</a></li></ul></div><h2 id="1">Import Simscape Battery Package</h2><pre class="codeinput"><span class="comment">% Change to folder where this script exists</span>
+  </style>
+</head>
+<body>
+<div class="content">
+<h1>Create Battery Pack 5p48s8p: 8 Subpacks with 5 Parallel Strings of 48 Cells</h1>
+<!--introduction-->
+<p>The code below automates the creation of a battery pack with electrical and thermal connections. It uses MATLAB commands from the Battery Pack Builder to define the pack architecture and create the Simscape blocks for use in simulation.</p>
+<div>
+<ul>
+<li>Fidelity: Grouped, 1-10-1 series, 5-1-5 parallel sets</li>
+<li>Thermal: Ambient and Cooling Plate</li>
+</ul>
+</div>
+<!--/introduction-->
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">Import Simscape Battery Package</a>
+</li>
+<li>
+<a href="#2">Define Cell</a>
+</li>
+<li>
+<a href="#3">Define Parallel Assembly</a>
+</li>
+<li>
+<a href="#4">Define Module</a>
+</li>
+<li>
+<a href="#5">Define Module Assembly</a>
+</li>
+<li>
+<a href="#6">Define Pack</a>
+</li>
+<li>
+<a href="#7">Generate Simscape model for use in Simulink</a>
+</li>
+<li>
+<a href="#8">Pack Model</a>
+</li>
+<li>
+<a href="#10">Module Assembly</a>
+</li>
+</ul>
+</div>
+<h2 id="1">Import Simscape Battery Package</h2>
+<pre class="codeinput">
+<span class="comment">% Change to folder where this script exists</span>
 cd(fileparts(which(mfilename)));
 import <span class="string">simscape.battery.builder.*</span>
-</pre><h2 id="2">Define Cell</h2><pre class="codeinput"><span class="comment">% Mass and geometry</span>
+</pre>
+<h2 id="2">Define Cell</h2>
+<pre class="codeinput">
+<span class="comment">% Mass and geometry</span>
 battCell_thr = Cell(<span class="string">"Geometry"</span>,CylindricalGeometry);
 battCell_thr.Geometry.Radius = simscape.Value(21.55/2,<span class="string">'mm'</span>);
 battCell_thr.Geometry.Height = simscape.Value(70.15,<span class="string">'mm'</span>);
@@ -79,7 +135,10 @@ battCell_thr.Mass            = simscape.Value(66.9,<span class="string">'g'</spa
 <span class="comment">% Enable thermal connections</span>
 battCell_thr.CellModelOptions.BlockParameters.T_dependence = <span class="string">"yes"</span>;
 battCell_thr.CellModelOptions.BlockParameters.thermal_port = <span class="string">"model"</span>;
-</pre><h2 id="3">Define Parallel Assembly</h2><pre class="codeinput"><span class="comment">% Connect 5 cells in parallel</span>
+</pre>
+<h2 id="3">Define Parallel Assembly</h2>
+<pre class="codeinput">
+<span class="comment">% Connect 5 cells in parallel</span>
 pSet_thr = ParallelAssembly(Cell = battCell_thr, <span class="keyword">...</span>
     Rows = 5, NumParallelCells=5, Topology=<span class="string">"Square"</span>);
 
@@ -95,7 +154,10 @@ pSetChart = BatteryChart(Parent = h1_5p,<span class="keyword">...</span>
     Battery=pSet_thr, SimulationStrategyVisible = <span class="string">"On"</span>);
 xlabel(<span class="string">'X'</span>);ylabel(<span class="string">'Y'</span>);
 title(<span class="string">'Battery Cells, 5 Parallel'</span>);
-</pre><img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_01.png" alt=""> <h2 id="4">Define Module</h2><pre class="codeinput"><span class="comment">% Connect 12 parallel sets in series</span>
+</pre>
+<img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_01.png" alt=""> <h2 id="4">Define Module</h2>
+<pre class="codeinput">
+<span class="comment">% Connect 12 parallel sets in series</span>
 batt_5p12s_1g10g1_5g1g5_thr = Module(ParallelAssembly=pSet_thr, <span class="keyword">...</span>
     CoolingPlate = <span class="string">"Bottom"</span>,<span class="keyword">...</span>
     NumSeriesAssemblies=12);
@@ -116,7 +178,10 @@ ModuleChart = BatteryChart(Parent = h1_5p12s_1g10g1_5g1g5,<span class="keyword">
     Battery=batt_5p12s_1g10g1_5g1g5_thr, SimulationStrategyVisible = <span class="string">"On"</span>);
 xlabel(<span class="string">'X'</span>);ylabel(<span class="string">'Y'</span>);
 title(<span class="string">'Battery Cells, 5 Parallel, 12 Series'</span>);
-</pre><img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_02.png" alt=""> <h2 id="5">Define Module Assembly</h2><pre class="codeinput"><span class="comment">% Connect 4 modules in series</span>
+</pre>
+<img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_02.png" alt=""> <h2 id="5">Define Module Assembly</h2>
+<pre class="codeinput">
+<span class="comment">% Connect 4 modules in series</span>
 batt_5p48s_1g10g1_5g1g5_thr = ModuleAssembly(<span class="keyword">...</span>
     Module = repmat(batt_5p12s_1g10g1_5g1g5_thr,1,4),<span class="keyword">...</span>
     AmbientThermalPath = <span class="string">"CellBasedThermalResistance"</span>,<span class="keyword">...</span>
@@ -137,7 +202,10 @@ BatteryChart(Parent = h1_5p48s_1g10g1_5g1g5,<span class="keyword">...</span>
     SimulationStrategyVisible = <span class="string">"On"</span>);
 xlabel(<span class="string">'X'</span>);ylabel(<span class="string">'Y'</span>);
 title(<span class="string">'Battery Cells, 5 Parallel, 48 Series'</span>);
-</pre><img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_03.png" alt=""> <h2 id="6">Define Pack</h2><pre class="codeinput"><span class="comment">% Connect 8 of the module assemblies in parallel</span>
+</pre>
+<img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_03.png" alt=""> <h2 id="6">Define Pack</h2>
+<pre class="codeinput">
+<span class="comment">% Connect 8 of the module assemblies in parallel</span>
 batt_5p48s8p_1g10g1_5g1g5_thr = Pack(<span class="keyword">...</span>
     ModuleAssembly=repmat(batt_5p48s_1g10g1_5g1g5_thr,1,8),<span class="keyword">...</span>
     InterModuleAssemblyGap = simscape.Value(0.1,<span class="string">"m"</span>),<span class="keyword">...</span>
@@ -161,21 +229,40 @@ BatteryChart(Parent = h1_5p48s8p_1g10g1_5g1g5,<span class="keyword">...</span>
     SimulationStrategyVisible = <span class="string">"On"</span>);
 xlabel(<span class="string">'X'</span>);ylabel(<span class="string">'Y'</span>);
 title(<span class="string">'Battery Cells, 5 Parallel, 48 Series, 8 Parallel'</span>);
-</pre><img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_04.png" alt=""> <h2 id="7">Generate Simscape model for use in Simulink</h2><p>If code does not already exist, generate code to produce Simscape block, Simulink library that assembles components into sub packs and packs, parameters for cell behavior, and parameters for initial conditions.</p><pre class="codeinput"><span class="keyword">if</span>(~exist(<span class="string">'+pack_5p48s8p_1g10g1_5g1g5_Thr'</span>,<span class="string">'dir'</span>))
+</pre>
+<img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_04.png" alt=""> <h2 id="7">Generate Simscape model for use in Simulink</h2>
+<p>If code does not already exist, generate code to produce Simscape block, Simulink library that assembles components into sub packs and packs, parameters for cell behavior, and parameters for initial conditions.</p>
+<pre class="codeinput">
+<span class="keyword">if</span>(~exist(<span class="string">'+pack_5p48s8p_1g10g1_5g1g5_Thr'</span>,<span class="string">'dir'</span>))
     buildBattery(batt_5p48s8p_1g10g1_5g1g5_thr,<span class="keyword">...</span>
         <span class="string">"LibraryName"</span>,<span class="string">"pack_5p48s8p_1g10g1_5g1g5_Thr"</span>,<span class="keyword">...</span>
         <span class="string">"MaskInitialTargets"</span>,<span class="string">"VariableNames"</span>,<span class="keyword">...</span>
         <span class="string">"MaskParameters"</span>,<span class="string">"VariableNames"</span>)
 <span class="keyword">end</span>
-</pre><h2 id="8">Pack Model</h2><p>This shows the Simulink block containing all 8 sub-packs</p><pre class="codeinput">open_system(<span class="string">'pack_5p48s8p_1g10g1_5g1g5_Thr'</span>)
+</pre>
+<h2 id="8">Pack Model</h2>
+<p>This shows the Simulink block containing all 8 sub-packs</p>
+<pre class="codeinput">open_system(<span class="string">'pack_5p48s8p_1g10g1_5g1g5_Thr'</span>)
 set_param(<span class="string">'pack_5p48s8p_1g10g1_5g1g5_Thr'</span>,<span class="string">'Lock'</span>,<span class="string">'off'</span>)
-</pre><img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_05.png" alt=""> <p>This level shows the electrical and thermal connections of the subpacks.</p><pre class="codeinput">set_param(<span class="string">'pack_5p48s8p_1g10g1_5g1g5_Thr/Pack1'</span>,<span class="string">'LinkStatus'</span>,<span class="string">'none'</span>)
+</pre>
+<img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_05.png" alt=""> <p>This level shows the electrical and thermal connections of the subpacks.</p>
+<pre class="codeinput">set_param(<span class="string">'pack_5p48s8p_1g10g1_5g1g5_Thr/Pack1'</span>,<span class="string">'LinkStatus'</span>,<span class="string">'none'</span>)
 open_system(<span class="string">'pack_5p48s8p_1g10g1_5g1g5_Thr/Pack1'</span>,<span class="string">'force'</span>)
-</pre><img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_06.png" alt=""> <h2 id="10">Module Assembly</h2><p>This level shows the electrical and thermal connections of the modules within the sub-pack.</p><pre class="codeinput">set_param(<span class="string">'pack_5p48s8p_1g10g1_5g1g5_Thr/Pack1/ModuleAssembly1'</span>,<span class="string">'LinkStatus'</span>,<span class="string">'none'</span>)
+</pre>
+<img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_06.png" alt=""> <h2 id="10">Module Assembly</h2>
+<p>This level shows the electrical and thermal connections of the modules within the sub-pack.</p>
+<pre class="codeinput">set_param(<span class="string">'pack_5p48s8p_1g10g1_5g1g5_Thr/Pack1/ModuleAssembly1'</span>,<span class="string">'LinkStatus'</span>,<span class="string">'none'</span>)
 open_system(<span class="string">'pack_5p48s8p_1g10g1_5g1g5_Thr/Pack1/ModuleAssembly1'</span>,<span class="string">'force'</span>)
-</pre><img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_07.png" alt=""> <pre class="codeinput">close <span class="string">all</span>
+</pre>
+<img vspace="5" hspace="5" src="CreatePack_5p48s8p_1g10g1_5g1g5_Thr_07.png" alt=""> <pre class="codeinput">close <span class="string">all</span>
 bdclose <span class="string">all</span>
-</pre><p class="footer">Copyright 2022-2023 The MathWorks, Inc.<br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023a</a><br></p></div><!--
+</pre>
+<p class="footer">Copyright 2022-2023 The MathWorks, Inc.<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
 ##### SOURCE BEGIN #####
 %% Create Battery Pack 5p48s8p: 8 Subpacks with 5 Parallel Strings of 48 Cells
 %
@@ -335,4 +422,6 @@ bdclose all
 
 
 ##### SOURCE END #####
---></body></html>
+-->
+</body>
+</html>

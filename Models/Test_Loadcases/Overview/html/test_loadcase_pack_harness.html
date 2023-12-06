@@ -1,12 +1,17 @@
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Battery Pack Test Harness</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-03-15"><meta name="DC.source" content="test_loadcase_pack_harness.m"><style type="text/css">
+      -->
+<title>Battery Pack Test Harness</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2023-12-04">
+<meta name="DC.source" content="test_loadcase_pack_harness.m">
+<style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,7 +72,66 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Battery Pack Test Harness</h1><!--introduction--><p>This example models a testrig for the entire battery energy storage system in an electric aircraft.  It enables rapid exploration of the design of the battery and cooling system.</p><p>In this model, a load case for the battery is defined as the current drawn from the battery over time.  The battery model can be configured to varying levels of granularity. The cooling plate can also be modeled at vary levels of fidelity and granularity.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Model</a></li><li><a href="#2">Pack Options</a></li><li><a href="#3">Simulation Results: Lumped Module Assembly, Boundary Conditions</a></li><li><a href="#7">Simulation Results: Lumped Module Assembly, Cooling Plate</a></li><li><a href="#8">Simulation Results: Edge Module Assembly, Cooling Plate</a></li><li><a href="#9">Simulation Results: Edge Detail Module Assembly, Cooling Plate</a></li></ul></div><h2 id="1">Model</h2><p>In this model, a load case for the battery is defined as the current drawn from the battery over time.  The current draw is based on the current measured during a mission in the main model.</p><img vspace="5" hspace="5" src="test_loadcase_pack_harness_01.png" alt=""> <h2 id="2">Pack Options</h2><p>The battery model can be configured to varying levels of granularity. All cells in a module can be treated as if they have the same thermal conditions, or we can increase the number of cells with unique conditions, such as treating the cells on the edge of the module assembly uniquely as they have a larger surface area exposed to ambient via the pack housing.</p><p>The pack options also include the cooling system.  Some options model the cooling system abstractly, treating the cooling system as a boundary condition. Others model the fluid flow through the cooling plate.</p><p><a href="matlab:open_system('test_loadcase_pack_harness');open_system('test_loadcase_pack_harness/Pack','force');">Open Subsystem</a></p><img vspace="5" hspace="5" src="test_loadcase_pack_harness_02.png" alt=""> <h2 id="3">Simulation Results: Lumped Module Assembly, Boundary Conditions</h2><p>This test configures the pack to assume a single set of thermal conditions for each module within the module assemblies, resulting in four conditions in each of the 8 sub packs.  The 8 sub packs are connected electrically in parallel.  The temperature gradient across the cooling plate is fixed.  This configuration is used to determine the target inlet and outlet temperatures for the fluid in the cooling plates</p><img vspace="5" hspace="5" src="test_loadcase_pack_harness_03.png" alt=""> <p>The battery module assembly consists of four modules, each with a single thermal connection to ambient and an array of independent thermal connections to the cooling plate.  The arrays of thermal connections to the cooling plate are assembled into a single array which is then connected to the cooling plate.</p><p><a href="matlab:open_system('test_loadcase_pack_harness');open_system('test_loadcase_pack_harness/Pack/Lumped%20BCs/ModuleAssembly1','force');">Open Subsystem</a></p><img vspace="5" hspace="5" src="test_loadcase_pack_harness_04.png" alt=""> <p>The thermal plate is modeled as a fixed temperature gradient along the flow path using Ideal Temperature Sources.  If the maximum cell temperature is below the limit (for example, 45&deg;C) and the maximum temperature difference between cells is below a limit (for example, 5&deg;C), then a requirement temperature difference for the fluid entering and exiting the cooling plate has been identified.</p><img vspace="5" hspace="5" src="test_loadcase_pack_harness_05.png" alt=""> <p>The plots below show the results of a test using this configuration.</p><img vspace="5" hspace="5" src="test_loadcase_pack_harness_06.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_07.png" alt=""> <h2 id="7">Simulation Results: Lumped Module Assembly, Cooling Plate</h2><p>This test configures the pack to assume a single set of thermal conditions for each module within the module assemblies, so four conditions in each of the 8 sub packs.  The 8 sub packs are connected electrically in parallel.  The cooling system is modeled with fluid flowing through individual cooling plates for each sub pack.  Parameters for the cooling system, such as cooling channel configuration and fluid flow rate, can be adjusted until the cells are within the target temperature range.</p><img vspace="5" hspace="5" src="test_loadcase_pack_harness_08.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_09.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_10.png" alt=""> <h2 id="8">Simulation Results: Edge Module Assembly, Cooling Plate</h2><p>This test configures the pack to assume individual thermal conditions for groups of cells at the edges of the module assembly. They are treated differently because they have a different surface area exposed to ambient conditions than the interior cells.  The cooling system is modeled with fluid flowing through individual cooling plates for each sub pack. Parameters of the cooling system can be adjusted until the cell temperatures are within the required range.</p><img vspace="5" hspace="5" src="test_loadcase_pack_harness_11.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_12.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_13.png" alt=""> <h2 id="9">Simulation Results: Edge Detail Module Assembly, Cooling Plate</h2><p>This test configures the pack to assume individual thermal conditions for each cells along the edges of the module assembly. This captures the unique situation of having more surface area exposed to ambient conditions than the interior cells, as well as the temperature gradient along the cooling channels.  The cooling system is modeled with fluid flowing through individual cooling plates for each sub pack. Parameters of the cooling system can be adjusted until the cell temperatures are within the required range.</p><img vspace="5" hspace="5" src="test_loadcase_pack_harness_14.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_15.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_16.png" alt=""> <p class="footer">Copyright 2022-2023 The MathWorks, Inc.<br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023a</a><br></p></div><!--
+  </style>
+</head>
+<body>
+<div class="content">
+<h1>Battery Pack Test Harness</h1>
+<!--introduction-->
+<p>This example models a testrig for the entire battery energy storage system in an electric aircraft. It enables rapid exploration of the design of the battery and cooling system.</p>
+<p>In this model, a load case for the battery is defined as the current drawn from the battery over time. The battery model can be configured to varying levels of granularity. The cooling plate can also be modeled at vary levels of fidelity and granularity.</p>
+<!--/introduction-->
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">Model</a>
+</li>
+<li>
+<a href="#2">Pack Options</a>
+</li>
+<li>
+<a href="#3">Simulation Results: Lumped Module Assembly, Boundary Conditions</a>
+</li>
+<li>
+<a href="#7">Simulation Results: Lumped Module Assembly, Cooling Plate</a>
+</li>
+<li>
+<a href="#8">Simulation Results: Edge Module Assembly, Cooling Plate</a>
+</li>
+<li>
+<a href="#9">Simulation Results: Edge Detail Module Assembly, Cooling Plate</a>
+</li>
+</ul>
+</div>
+<h2 id="1">Model</h2>
+<p>In this model, a load case for the battery is defined as the current drawn from the battery over time. The current draw is based on the current measured during a mission in the main model.</p>
+<img vspace="5" hspace="5" src="test_loadcase_pack_harness_01.png" alt=""> <h2 id="2">Pack Options</h2>
+<p>The battery model can be configured to varying levels of granularity. All cells in a module can be treated as if they have the same thermal conditions, or we can increase the number of cells with unique conditions, such as treating the cells on the edge of the module assembly uniquely as they have a larger surface area exposed to ambient via the pack housing.</p>
+<p>The pack options also include the cooling system. Some options model the cooling system abstractly, treating the cooling system as a boundary condition. Others model the fluid flow through the cooling plate.</p>
+<p>
+<a href="matlab:open_system('test_loadcase_pack_harness');open_system('test_loadcase_pack_harness/Pack','force');">Open Subsystem</a>
+</p>
+<img vspace="5" hspace="5" src="test_loadcase_pack_harness_02.png" alt=""> <h2 id="3">Simulation Results: Lumped Module Assembly, Boundary Conditions</h2>
+<p>This test configures the pack to assume a single set of thermal conditions for each module within the module assemblies, resulting in four conditions in each of the 8 sub packs. The 8 sub packs are connected electrically in parallel. The temperature gradient across the cooling plate is fixed. This configuration is used to determine the target inlet and outlet temperatures for the fluid in the cooling plates</p>
+<img vspace="5" hspace="5" src="test_loadcase_pack_harness_03.png" alt=""> <p>The battery module assembly consists of four modules, each with a single thermal connection to ambient and an array of independent thermal connections to the cooling plate. The arrays of thermal connections to the cooling plate are assembled into a single array which is then connected to the cooling plate.</p>
+<p>
+<a href="matlab:open_system('test_loadcase_pack_harness');open_system('test_loadcase_pack_harness/Pack/Lumped%20BCs/ModuleAssembly1','force');">Open Subsystem</a>
+</p>
+<img vspace="5" hspace="5" src="test_loadcase_pack_harness_04.png" alt=""> <p>The thermal plate is modeled as a fixed temperature gradient along the flow path using Ideal Temperature Sources. If the maximum cell temperature is below the limit (for example, 45&deg;C) and the maximum temperature difference between cells is below a limit (for example, 5&deg;C), then a requirement temperature difference for the fluid entering and exiting the cooling plate has been identified.</p>
+<img vspace="5" hspace="5" src="test_loadcase_pack_harness_05.png" alt=""> <p>The plots below show the results of a test using this configuration.</p>
+<img vspace="5" hspace="5" src="test_loadcase_pack_harness_06.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_07.png" alt=""> <h2 id="7">Simulation Results: Lumped Module Assembly, Cooling Plate</h2>
+<p>This test configures the pack to assume a single set of thermal conditions for each module within the module assemblies, so four conditions in each of the 8 sub packs. The 8 sub packs are connected electrically in parallel. The cooling system is modeled with fluid flowing through individual cooling plates for each sub pack. Parameters for the cooling system, such as cooling channel configuration and fluid flow rate, can be adjusted until the cells are within the target temperature range.</p>
+<img vspace="5" hspace="5" src="test_loadcase_pack_harness_08.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_09.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_10.png" alt=""> <h2 id="8">Simulation Results: Edge Module Assembly, Cooling Plate</h2>
+<p>This test configures the pack to assume individual thermal conditions for groups of cells at the edges of the module assembly. They are treated differently because they have a different surface area exposed to ambient conditions than the interior cells. The cooling system is modeled with fluid flowing through individual cooling plates for each sub pack. Parameters of the cooling system can be adjusted until the cell temperatures are within the required range.</p>
+<img vspace="5" hspace="5" src="test_loadcase_pack_harness_11.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_12.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_13.png" alt=""> <h2 id="9">Simulation Results: Edge Detail Module Assembly, Cooling Plate</h2>
+<p>This test configures the pack to assume individual thermal conditions for each cells along the edges of the module assembly. This captures the unique situation of having more surface area exposed to ambient conditions than the interior cells, as well as the temperature gradient along the cooling channels. The cooling system is modeled with fluid flowing through individual cooling plates for each sub pack. Parameters of the cooling system can be adjusted until the cell temperatures are within the required range.</p>
+<img vspace="5" hspace="5" src="test_loadcase_pack_harness_14.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_15.png" alt=""> <img vspace="5" hspace="5" src="test_loadcase_pack_harness_16.png" alt=""> <p class="footer">Copyright 2022-2023 The MathWorks, Inc.<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
 ##### SOURCE BEGIN #####
 %% Battery Pack Test Harness
 %
@@ -210,4 +274,6 @@ test_loadcase_pack_plot1degc
 close all
 bdclose all
 ##### SOURCE END #####
---></body></html>
+-->
+</body>
+</html>

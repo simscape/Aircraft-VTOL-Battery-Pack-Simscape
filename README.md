@@ -14,6 +14,9 @@ explores the workflow of designing the battery pack.
 
 Open the project file Airtaxi_VTOL.prj to get started.
 
+View on [![View Electric Aircraft (VTOL) Battery Pack Model with Simscape™ on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/122392-electric-aircraft-vtol-battery-pack-model-with-simscape)  
+You can also open in MATLAB Online: [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=simscape/Aircraft-VTOL-Battery-Pack-Simscape&project=Airtaxi_VTOL.prj)
+
 ## **Main Aircraft Model**
 ![](Overview/html/ssc_airvtol_elec_battery_01.png)
 

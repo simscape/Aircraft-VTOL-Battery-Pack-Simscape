@@ -7,8 +7,8 @@
 min_range = 25;  % km
 
 % Test set for battery capacity
-battery_capacity_set = [100:20:200];
-payload_set = [0:10:120];
+battery_capacity_set = 100:20:200;
+payload_set = 0:10:120;
 
 if(~exist('battery_pdensity_set','var'))
     % If not defined, do not use parallel
@@ -21,6 +21,7 @@ if (~exist('modelname','var'))
 end
 
 open_system(modelname)
+set_param([modelname '/Battery'],'LabelModeActiveChoice','Abstract')
 
 % Store simulation inputs
 clear simInput
