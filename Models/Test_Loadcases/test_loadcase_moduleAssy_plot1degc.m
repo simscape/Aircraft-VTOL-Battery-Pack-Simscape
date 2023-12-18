@@ -33,7 +33,7 @@ tempLims = [0 0];
 % Get temperature results for each module
 modT = [];
 for mo_i = 1:length(moduleNms)
-    modT = [modT simlog_test_loadcase_module.ModuleAssembly1.(variantNameModule).(moduleNms{mo_i}).temperatureCellModel.series.values('degC')];
+    modT = [modT simlog_test_loadcase_module.ModuleAssembly1.(variantNameModule).(moduleNms{mo_i}).temperatureCell.series.values('degC')];
 end
 
 % Plot results

@@ -11,16 +11,16 @@
 % ModuleType1.AH = 27; % Cell capacity, AH, A*hr
 
 load('batteryTableBased.mat')
-ModuleType1.SOC_vec = batteryTableBased.parameters.SOC_vec.value;
-ModuleType1.T_vec   = batteryTableBased.parameters.T_vec.value+273.15; 
-ModuleType1.V0_vec  = batteryTableBased.parameters.V0_vec.value;
-ModuleType1.V0_mat  = batteryTableBased.parameters.V0_mat.value;
-ModuleType1.V_range = batteryTableBased.parameters.V_range.value;
-ModuleType1.R0_vec  = batteryTableBased.parameters.R0_vec.value;
-ModuleType1.R0_mat  = batteryTableBased.parameters.R0_mat.value;
-ModuleType1.AH      = batteryTableBased.parameters.AH.value;
+ModuleType1.SOC_vecCell = batteryTableBased.parameters.SOC_vec.value;
+ModuleType1.T_vecCell   = batteryTableBased.parameters.T_vec.value+273.15; 
+ModuleType1.V0_vecCell  = batteryTableBased.parameters.V0_vec.value;
+ModuleType1.V0_matCell  = batteryTableBased.parameters.V0_mat.value;
+ModuleType1.V_rangeCell = batteryTableBased.parameters.V_range.value;
+ModuleType1.R0_vecCell  = batteryTableBased.parameters.R0_vec.value;
+ModuleType1.R0_matCell  = batteryTableBased.parameters.R0_mat.value;
+ModuleType1.AHCell      = batteryTableBased.parameters.AH.value;
 
-ModuleType1.thermal_mass = 100; % Thermal mass, J/K
+ModuleType1.thermal_massCell = 100; % Thermal mass, J/K
 ModuleType1.CoolantResistance = 1.2*5; % Cell level coolant thermal path resistance, K/W
 ModuleType1.AmbientResistance = 25*5; % Cell level ambient thermal path resistance, K/W
 

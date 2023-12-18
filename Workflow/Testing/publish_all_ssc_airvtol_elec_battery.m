@@ -1,3 +1,8 @@
+
+%% Rebuild all libraries - takes time
+rebuild_all_pack_libraries
+
+%% Publish all doc
 warning('off','Simulink:Engine:MdlFileShadowedByFile');
 warning('off','Simulink:Harness:WarnABoutNameShadowingOnActivation');
 
