@@ -2,7 +2,7 @@
 %% Plot Description:
 %
 
-% Copyright 2022-2023 The MathWorks, Inc.
+% Copyright 2022-2024 The MathWorks, Inc.
 
 % Find active variant
 fnames = fieldnames(simlog_test_loadcase_module.ModuleAssembly1);

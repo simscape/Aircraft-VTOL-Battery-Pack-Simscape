@@ -8,7 +8,7 @@
 % * Fidelity: Detailed
 % * Thermal: Ambient and Cooling Plate
 %
-% Copyright 2022-2023 The MathWorks, Inc.
+% Copyright 2022-2024 The MathWorks, Inc.
 
 %% Import Simscape Battery Package
 

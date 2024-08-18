@@ -9,7 +9,7 @@
 % varying levels of granularity. The cooling plate can also be modeled at
 % vary levels of fidelity and granularity.
 %
-% Copyright 2022-2023 The MathWorks, Inc.
+% Copyright 2022-2024 The MathWorks, Inc.
 
 %% Model
 %

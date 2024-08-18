@@ -1,6 +1,6 @@
 % Default parameters for electric aircraft examples with battery system
 %
-% Copyright 2022-2023 The MathWorks, Inc.
+% Copyright 2022-2024 The MathWorks, Inc.
 
 % Default parameters
 cooling_system.pump_max_flow   = 0.6*0+0.5;  % kg/s
