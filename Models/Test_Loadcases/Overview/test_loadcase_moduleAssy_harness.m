@@ -23,7 +23,7 @@
 % increased to capture the temperature gradient within the plate in more
 % detail.
 %
-% Copyright 2022-2024 The MathWorks, Inc.
+% Copyright 2022-2025 The MathWorks, Inc.
 
 %% Model
 %

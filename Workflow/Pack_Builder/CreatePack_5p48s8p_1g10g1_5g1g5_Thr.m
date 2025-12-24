@@ -8,7 +8,7 @@
 % * Fidelity: Grouped, 1-10-1 series, 5-1-5 parallel sets
 % * Thermal: Ambient and Cooling Plate
 %
-% Copyright 2022-2024 The MathWorks, Inc.
+% Copyright 2022-2025 The MathWorks, Inc.
 
 %% Import Simscape Battery Package
 

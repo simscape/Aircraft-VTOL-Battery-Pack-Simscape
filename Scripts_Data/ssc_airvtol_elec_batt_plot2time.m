@@ -7,7 +7,7 @@
 % aircraft during a flight cycle. The second plot shows the current and
 % power levels during simulation.
 %
-% Copyright 2022-2024 The MathWorks, Inc.
+% Copyright 2022-2025 The MathWorks, Inc.
 
 % Generate simulation results if they don't exist
 if ~exist('simlog_ssc_airvtol_elec', 'var')
