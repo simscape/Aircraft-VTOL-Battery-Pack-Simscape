@@ -2,7 +2,7 @@
 %% Plot Description:
 %
 
-% Copyright 2022-2025 The MathWorks, Inc.
+% Copyright 2022-2026 The MathWorks, Inc.
 
 % Find active variant
 fnames = fieldnames(simlog_test_loadcase_module.ModuleAssembly1);
@@ -33,7 +33,8 @@ tempLims = [0 0];
 % Get temperature results for each module
 modT = [];
 for mo_i = 1:length(moduleNms)
-    modT = [modT simlog_test_loadcase_module.ModuleAssembly1.(variantNameModule).(moduleNms{mo_i}).temperatureCell.series.values('degC')];
+    %modT = [modT simlog_test_loadcase_module.ModuleAssembly1.(variantNameModule).(moduleNms{mo_i}).temperatureCell.series.values('degC')];
+    modT = [modT simlog_test_loadcase_module.ModuleAssembly1.(variantNameModule).(moduleNms{mo_i}).batteryTemperature.series.values('degC')];
 end
 
 % Plot results

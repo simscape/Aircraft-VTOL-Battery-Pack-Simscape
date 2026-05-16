@@ -11,18 +11,28 @@
 % ModuleType1.AH = 27; % Cell capacity, AH, A*hr
 
 load('batteryTableBased.mat')
-ModuleType1.SOC_vecCell = batteryTableBased.parameters.SOC_vec.value;
-ModuleType1.T_vecCell   = batteryTableBased.parameters.T_vec.value+273.15; 
-ModuleType1.V0_vecCell  = batteryTableBased.parameters.V0_vec.value;
-ModuleType1.V0_matCell  = batteryTableBased.parameters.V0_mat.value;
-ModuleType1.V_rangeCell = batteryTableBased.parameters.V_range.value;
-ModuleType1.R0_vecCell  = batteryTableBased.parameters.R0_vec.value;
-ModuleType1.R0_matCell  = batteryTableBased.parameters.R0_mat.value;
-ModuleType1.AHCell      = batteryTableBased.parameters.AH.value;
+%ModuleType1.SOCBreakpointsCell = batteryTableBased.parameters.SOC_vec.value;
+%ModuleType1.TemperatureBreakpointsCell   = batteryTableBased.parameters.T_vec.value+273.15; 
+%ModuleType1.V0_vecCell  = batteryTableBased.parameters.V0_vec.value;
+%ModuleType1.OpenCircuitVoltageThermalCell  = batteryTableBased.parameters.V0_mat.value;
+%ModuleType1.VoltageRangeCell = batteryTableBased.parameters.V_range.value;
+%ModuleType1.R0_vecCell  = batteryTableBased.parameters.R0_vec.value;
+%ModuleType1.R0_matCell  = batteryTableBased.parameters.R0_mat.value;
+%ModuleType1.BatteryCapacityCell = batteryTableBased.parameters.AH.value;
 
-ModuleType1.thermal_massCell = 100; % Thermal mass, J/K
+ModuleType1.BatteryThermalMassCell = 100; % Thermal mass, J/K
 ModuleType1.CoolantResistance = 1.2*5; % Cell level coolant thermal path resistance, K/W
 ModuleType1.AmbientResistance = 25*5; % Cell level ambient thermal path resistance, K/W
+
+load('BatteryParamStruct.mat')
+ModuleType1.BatteryCapacityCell = str2num(BatteryParamStruct.Parameters.BatteryCapacity.ValueExpr);
+ModuleType1.SOCBreakpointsCell  = str2num(BatteryParamStruct.Parameters.SOCBreakpoints.ValueExpr);
+ModuleType1.TemperatureBreakpointsCell = str2num(BatteryParamStruct.Parameters.TemperatureBreakpoints.ValueExpr)+273.15;
+ModuleType1.OpenCircuitVoltageThermalCell = str2num(BatteryParamStruct.Parameters.OpenCircuitVoltageThermal.ValueExpr);
+ModuleType1.VoltageRangeCell = str2num(BatteryParamStruct.Parameters.VoltageRange.ValueExpr); 
+ModuleType1.ResistanceSOCBreakpointsCell = str2num(BatteryParamStruct.Parameters.ResistanceSOCBreakpoints.ValueExpr);
+ModuleType1.ResistanceTemperatureBreakpointsCell = str2num(BatteryParamStruct.Parameters.ResistanceTemperatureBreakpoints.ValueExpr)+273.15;
+ModuleType1.R0ThermalCell = str2num(BatteryParamStruct.Parameters.R0Thermal.ValueExpr);
 
 %% ParallelAssemblyType1
 %ParallelAssemblyType1.SOC_vec = [0, .1, .25, .5, .75, .9, 1]; % Vector of state-of-charge values, SOC
@@ -34,6 +44,7 @@ ModuleType1.AmbientResistance = 25*5; % Cell level ambient thermal path resistan
 %ParallelAssemblyType1.R0_mat = [.0117, .0085, .009; .011, .0085, .009; .0114, .0087, .0092; .0107, .0082, .0088; .0107, .0083, .0091; .0113, .0085, .0089; .0116, .0085, .0089]; % Terminal resistance, R0(SOC,T), Ohm
 %ParallelAssemblyType1.AH = 27; % Cell capacity, AH, A*hr
 
+%{
 ParallelAssemblyType1.SOC_vec = batteryTableBased.parameters.SOC_vec.value;
 ParallelAssemblyType1.T_vec   = batteryTableBased.parameters.T_vec.value+273.15; 
 ParallelAssemblyType1.V0_vec  = batteryTableBased.parameters.V0_vec.value;
@@ -42,10 +53,14 @@ ParallelAssemblyType1.V_range = batteryTableBased.parameters.V_range.value;
 ParallelAssemblyType1.R0_vec  = batteryTableBased.parameters.R0_vec.value;
 ParallelAssemblyType1.R0_mat  = batteryTableBased.parameters.R0_mat.value;
 ParallelAssemblyType1.AH      = batteryTableBased.parameters.AH.value;
+%}
+ParallelAssemblyType1 = ModuleType1;
 
 ParallelAssemblyType1.thermal_mass = 100; % Thermal mass, J/K
 ParallelAssemblyType1.CoolantResistance = 1.2*5; % Cell level coolant thermal path resistance, K/W
 ParallelAssemblyType1.AmbientResistance = 25*5; % Cell level ambient thermal path resistance, K/W
+
+
 
 ModuleType1_det.Module1 = ModuleType1;
 edge_factor   = 0.3; 
